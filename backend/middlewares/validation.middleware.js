@@ -5,7 +5,7 @@ const validateDataMiddleware = (req, res, next) => {
     return res.status(400).json({ msg: "email is not valid!" });
   }
 
-  if (!/^\(\+\d{1,3}\)\d{3}-\d{4}-\d{2}$/.test(phone)) {
+  if (!/^\(\+\d{1,3}\)\d{9}$/.test(phone)) {
     return res.status(400).json({ msg: "phone is not valid!" });
   }
 

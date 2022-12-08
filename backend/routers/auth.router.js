@@ -13,7 +13,4 @@ const {
 authRouter.post("/login", loginController);
 authRouter.post("/signup", validateDataMiddleware, registrationController);
 
-
-
-
 module.exports = authRouter;

@@ -11,6 +11,8 @@ const addNewMovie = async (req, res) => {
     country,
     releaseDate,
     description,
+    movieImage,
+    categoryId,
   } = req.body;
 
   try {
@@ -34,6 +36,8 @@ const addNewMovie = async (req, res) => {
       country: country,
       releaseDate: releaseDate,
       description: description,
+      movieImage,
+      categoryId,
     });
   
     res.json({ msg: "Create Movie successfully" });
@@ -55,7 +59,7 @@ const nowShowingMovie = async (req, res) => {
   }
 };
 
-const upComingMovie = async (req, res) => {
+const upcomingMovie = async (req, res) => {
   try {
     const movie = await MovieModel.findAll({ where: {categoryId: 2} });
     res.status(200).json(movie);
@@ -67,4 +71,16 @@ const upComingMovie = async (req, res) => {
   }
 };
 
-module.exports = { addNewMovie, nowShowingMovie, upComingMovie };
+const allMovie = async (req, res) => {
+  try {
+    const movie = await MovieModel.findAll();
+    res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ msg: "Server get failed in trying to fetch upComing Movies" });
+  }
+};
+
+module.exports = { addNewMovie, nowShowingMovie, upcomingMovie, allMovie };
