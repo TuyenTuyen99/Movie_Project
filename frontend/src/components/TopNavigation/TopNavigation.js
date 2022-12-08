@@ -56,7 +56,7 @@ function TopNavigation() {
                       <li>
                         <a
                           className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white focus:text-white focus:bg-gray-700 active:bg-blue-600"
-                          href="http://localhost:3000/now-showing"
+                          href="http://localhost:3000/movie/now-showing"
                         >
                           Now showing
                         </a>
@@ -64,9 +64,9 @@ function TopNavigation() {
                       <li>
                         <a
                           className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white focus:text-white focus:bg-gray-700"
-                          href="http://localhost:3000/upcoming"
+                          href="http://localhost:3000/movie/upcoming"
                         >
-                          Upcoming
+                          UpComing
                         </a>
                       </li>
                     </ul>
