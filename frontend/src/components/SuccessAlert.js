@@ -1,13 +1,13 @@
 function SuccessAlert(props) {
   return (
     <div
-      class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+      className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
       role="alert"
     >
-      <div class="flex">
-        <div class="py-1">
+      <div className="flex">
+        <div className="py-1">
           <svg
-            class="fill-current h-6 w-6 text-teal-500 mr-4"
+            className="fill-current h-6 w-6 text-teal-500 mr-4"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -15,8 +15,8 @@ function SuccessAlert(props) {
           </svg>
         </div>
         <div>
-          <p class="font-bold">Congrats!</p>
-          <p class="text-sm">
+          <p className="font-bold">Congrats!</p>
+          <p className="text-sm">
             {props.message}
           </p>
         </div>

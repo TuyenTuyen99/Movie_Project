@@ -1,15 +1,14 @@
 const UserModel = require("../models/users.model");
 
-const userInfo = async (req, res) => {
+const findUser = async (req, res) => {
   try {
-    const user = await UserModel.findOne();
+    const userId = req.id;
+    const user = await UserModel.findOne({ where: { id: userId } });
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({ msg: "Server failed" });
+    res.status(500).json({ msg: "Server failed" });
   }
 };
 
-module.exports = userInfo;
+module.exports = findUser;

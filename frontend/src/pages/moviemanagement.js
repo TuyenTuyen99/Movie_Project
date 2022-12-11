@@ -45,7 +45,7 @@ function MovieManagement() {
       description,
     };
     await axios
-      .post("http://localhost:8080/movie/new-movie", addingData)
+      .post("http://localhost:8080/movies/new-movie", addingData)
       .then(function (response) {
         const {
           data: { msg },

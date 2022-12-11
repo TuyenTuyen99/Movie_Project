@@ -20,8 +20,8 @@ const verifyToken = async (req, res, next) => {
     // if User exist
     if (foundUser) {
       // forward id property to check role
-      req.role = foundUser.role;
-      
+      req.roleId = foundUser.roleId;
+      req.id = foundUser.id;
       next();
       return;
     }
@@ -47,9 +47,9 @@ const isAdmin = (req, res, next) => {
 };
 
 const isUser = (req, res, next) => {
-  const role = req.role;
+  const roleId = req.roleId;
 
-  if (role.toLowerCase() === "user") {
+  if (roleId === 3) {
     next();
     return;
   }

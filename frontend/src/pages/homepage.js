@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import FilmGallery from "../components/FilmGallery";
+import { useNavigate } from "react-router-dom";
+import MovieGallery from "../components/FilmGallery";
 import api from "../config/api";
-import { NOWSHOWING_MOVIE, UPCOMING_MOVIE } from "../constants/film";
+import { NOWSHOWING_MOVIE, UPCOMING_MOVIE } from "../constants/categories";
 
 function Homepage() {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [nowShowingMovies, setNowShowingMovies] = useState([]);
-
+  const navigate = useNavigate();
+  const handleGoToUpcoming = () => {
+    navigate("/movies/upcoming");
+  };
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await api.get("/movie");
+        const response = await api.get("/movies");
 
         if (response.status === 200) {
           const nowShowingMovies = response.data.filter(
@@ -31,7 +35,7 @@ function Homepage() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <div
         id="carouselExampleCaptions"
         className="carousel slide relative"
@@ -125,31 +129,31 @@ function Homepage() {
         </button>
       </div>
 
-      <section className="bg-white dark:bg-gray-900">
+      <section className="dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
           <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-purple-800">
               Now Showing
             </h2>
-            <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+            <p className="font-light text-purple-500 italic lg:mb-16 sm:text-xl dark:text-gray-400">
               Keeping up the latest movie from all over around the world!
             </p>
           </div>
-          <FilmGallery movies={nowShowingMovies} />
+          <MovieGallery movies={nowShowingMovies} />
         </div>
       </section>
 
-      <section className="bg-white dark:bg-gray-900">
+      <section className="dark:bg-gray-900 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
-          <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16 leading-10">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-purple-800 dark:text-white" onClick={handleGoToUpcoming}>
               Upcoming
             </h2>
-            <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
+            <p className="font-light text-purple-500 italic lg:mb-16 sm:text-xl dark:text-gray-400">
               Keeping up the latest movie from all over around the world!
             </p>
           </div>
-          <FilmGallery movies={upcomingMovies} />
+          <MovieGallery movies={upcomingMovies} />
         </div>
       </section>
     </div>

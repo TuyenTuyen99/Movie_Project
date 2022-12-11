@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // register authRouter for our server
 app.use("/auth", authRouter);
-app.use("/movie", movieRouter);
+app.use("/movies", movieRouter);
 app.use("/resource", resourceRouter);
 app.use("/user", userRouter);
 

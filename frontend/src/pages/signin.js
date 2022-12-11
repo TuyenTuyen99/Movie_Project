@@ -33,12 +33,15 @@ function Signin() {
         } = response;
 
         if (response.status === 200) {
-          const { token } = response.data;
-          localStorage.setItem('x-access-token', token)
+          const { accessToken } = response.data;
+          localStorage.setItem('x-access-token', accessToken)
           setIsSuccess(true);
           setTimeout(() => {
             navigate("/");
           }, 3000);
+          setTimeout(()=>{
+            document.location.reload();
+          },3001);
         }
       })
       .catch(function (error) {
@@ -96,7 +99,6 @@ function Signin() {
                 className="pl-2 outline-none border-none"
                 type="text"
                 name=""
-                id=""
                 placeholder="Username"
                 onChange={handleChangeUserName}
               />
@@ -118,7 +120,6 @@ function Signin() {
                 className="pl-2 outline-none border-none"
                 type="password"
                 name=""
-                id=""
                 placeholder="Password"
                 onChange={handleChangePwd}
               />

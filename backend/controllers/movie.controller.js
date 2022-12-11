@@ -83,4 +83,17 @@ const allMovie = async (req, res) => {
   }
 };
 
-module.exports = { addNewMovie, nowShowingMovie, upcomingMovie, allMovie };
+const movieDetail = async (req,res) => {
+  const id = req.params.id;
+  try {
+    const movie = await MovieModel.findOne({ where: {id} });
+    res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ msg: "Server get failed in trying to fetch Movie Detail" });
+  }
+};
+
+module.exports = { addNewMovie, nowShowingMovie, upcomingMovie, allMovie, movieDetail};

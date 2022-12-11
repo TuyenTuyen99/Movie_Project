@@ -2,7 +2,6 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  createBrowserRouter,
 } from "react-router-dom";
 import Homepage from "../pages/homepage";
 import MovieDetail from "../pages/movieDetail";
@@ -10,7 +9,8 @@ import MovieManagement from "../pages/moviemanagement";
 import NowShowingMovie from "../pages/nowShowingMovie";
 import SignIn from "../pages/signin";
 import Signup from "../pages/signup";
-import UpComingMovie from "../pages/upComingMovie";
+import UpcomingMovie from "../pages/upcomingMovie";
+import UserInfo from "../pages/user";
 
 function App() {
   return (
@@ -20,7 +20,10 @@ function App() {
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/moviemanagement" element={<MovieManagement />}></Route>
-        <Route path="/movie/now-showing" element={<NowShowingMovie />}></Route>
+        <Route path="/movies/now-showing" element={<NowShowingMovie />}></Route>
+        <Route path="/movies/upcoming" element={<UpcomingMovie />}></Route>
+        <Route path="/user" element={<UserInfo />}></Route>
+        <Route path="/movies/:id" element={<MovieDetail />}></Route>
       </Routes>
     </BrowserRouter>
   );
