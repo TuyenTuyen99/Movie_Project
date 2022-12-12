@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../config/api";
+
 import Account from "../Account";
 import Logout from "../Logout";
 
@@ -14,7 +13,7 @@ function HiUser() {
               className="inline-block no-underline py-2 px-4 hover:italic font-bold "
               href="http://localhost:3000/user"
             >
-              Hi, {user.fullName}
+              Hi, {user.userName}
             </a>
           </li>
           <li>

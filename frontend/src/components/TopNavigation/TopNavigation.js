@@ -76,14 +76,14 @@ function TopNavigation() {
                   </div>
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <a
                   className="inline-block no-underline hover:text-purple-800 hover:no-underline py-2 px-4"
                   href="#"
                 >
                   Memberships
                 </a>
-              </li>
+              </li> */}
               {/* <li>
                 <a
                   className="inline-block no-underline hover:text-purple-800 hover:no-underline py-2 px-4"

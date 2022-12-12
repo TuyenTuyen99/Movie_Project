@@ -10,7 +10,7 @@ import NowShowingMovie from "../pages/nowShowingMovie";
 import SignIn from "../pages/signin";
 import Signup from "../pages/signup";
 import UpcomingMovie from "../pages/upcomingMovie";
-import UserInfo from "../pages/user";
+import UserInfo from "../pages/profile";
 
 function App() {
   return (

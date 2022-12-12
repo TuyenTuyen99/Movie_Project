@@ -9,6 +9,7 @@ function MovieManagement() {
   const [country, setCountry] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [description, setDescription] = useState("");
+  const [movieImage, setMovieImage] = useState("");
 
   // handle function
   const handleAddNewTitle = (e) => {
@@ -32,6 +33,9 @@ function MovieManagement() {
   const handleAddNewDescription = (e) => {
     setDescription(e.target.value);
   };
+  const handleAddNewMovieImage = (e) => {
+    setMovieImage(e.target.value);
+  };
 
   const handleAddNewMovie = async (e) => {
     e.preventDefault();
@@ -43,6 +47,8 @@ function MovieManagement() {
       country,
       releaseDate,
       description,
+      movieImage,
+      categoryId:1,
     };
     await axios
       .post("http://localhost:8080/movies/new-movie", addingData)
@@ -79,7 +85,7 @@ function MovieManagement() {
             type="text"
             name=""
             id=""
-            placeholder="Title"
+            placeholder="Actors"
             onChange={handleAddNewActors}
           />
         </div>
@@ -123,7 +129,7 @@ function MovieManagement() {
             onChange={handleAddNewReleasingDate}
           />
         </div>
-        <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
+        <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
           <input
             className="pl-2 outline-none border-none"
             type="text"
@@ -131,6 +137,16 @@ function MovieManagement() {
             id=""
             placeholder="Description"
             onChange={handleAddNewDescription}
+          />
+        </div>
+        <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
+          <input
+            className="pl-2 outline-none border-none"
+            type="text"
+            name=""
+            id=""
+            placeholder="imageUrl"
+            onChange={handleAddNewMovieImage}
           />
         </div>
         <button

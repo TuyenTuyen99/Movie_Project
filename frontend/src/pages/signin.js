@@ -2,12 +2,14 @@ import { useState } from "react";
 import api from "../config/api";
 import { useNavigate } from "react-router-dom";
 import SuccessAlert from "../components/SuccessAlert";
+import FailedAlert from "../components/FailedAlert";
 
 function Signin() {
   // hooks
   const [userName, setUserName] = useState("");
   const [password, setPwd] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
   const navigate = useNavigate();
   // handle function
   const handleChangeUserName = (e) => {
@@ -33,28 +35,32 @@ function Signin() {
         } = response;
 
         if (response.status === 200) {
-          const { accessToken } = response.data;
-          localStorage.setItem('x-access-token', accessToken)
-          setIsSuccess(true);
-          setTimeout(() => {
-            navigate("/");
-          }, 3000);
-          setTimeout(()=>{
-            document.location.reload();
-          },3001);
+          
+            const { accessToken } = response.data;
+            localStorage.setItem("x-access-token", accessToken);
+            setIsSuccess(true);
+            setTimeout(() => {
+              navigate("/");
+            }, 3000);
+            setTimeout(() => {
+              document.location.reload();
+            }, 3001);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setIsFailure(true);
+        // setTimeout(() => {
+        //   document.location.reload();
+        // }, 1001);
       });
   };
 
   return (
     <div>
       {/* success alert */}
-      {isSuccess && <SuccessAlert message="Successfully login!" />}
+      {(isSuccess && <SuccessAlert message="Successfully login!" />)||(isFailure && <FailedAlert message="fail" />)}
       <div className="h-screen md:flex">
-        
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">
@@ -76,7 +82,6 @@ function Signin() {
           <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         </div>
         <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-          
           <form className="bg-white" onSubmit={handleLogin}>
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Login</h1>
             <p className="text-sm font-normal text-gray-600 mb-7">

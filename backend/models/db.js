@@ -116,11 +116,11 @@ const setAssociation = () => {
   PaymentModel.belongsTo(MethodModel, option10);
 
   // set association for SeatModel and BookingSeatModel 1-1
-  BookingSeatModel.hasOne(SeatModel, {
+  SeatModel.hasOne(BookingSeatModel, {
     foreignKey: "seatId",
   });
-  SeatModel.belongsTo(BookingSeatModel, {
-    foreignKey: "bookingId",
+  BookingSeatModel.belongsTo(SeatModel, {
+    foreignKey: "seatId",
   });
 
   // set association for BookingModel and PaymentModel 1-1

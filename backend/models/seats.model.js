@@ -8,7 +8,7 @@ const SeatModel = connection.define(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
 
     name: {

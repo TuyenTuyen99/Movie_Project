@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { connection } = require("./connection");
-const MODEL_NAME = "bookingSeat";
+const MODEL_NAME = "BookingSeat";
 
 const BookingSeatModel = connection.define(
   MODEL_NAME,

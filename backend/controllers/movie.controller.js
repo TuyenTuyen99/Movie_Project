@@ -12,7 +12,7 @@ const addNewMovie = async (req, res) => {
     releaseDate,
     description,
     movieImage,
-    categoryId,
+    // categoryId,
   } = req.body;
 
   try {
@@ -37,9 +37,9 @@ const addNewMovie = async (req, res) => {
       releaseDate: releaseDate,
       description: description,
       movieImage,
-      categoryId,
+      categoryId: 2,
     });
-  
+
     res.json({ msg: "Create Movie successfully" });
   } catch (error) {
     res.json({ msg: "Server get failed in trying to add new movie" });
@@ -49,7 +49,7 @@ const addNewMovie = async (req, res) => {
 
 const nowShowingMovie = async (req, res) => {
   try {
-    const movie = await MovieModel.findAll({ where: {categoryId: 1}});
+    const movie = await MovieModel.findAll({ where: { categoryId: 1 } });
     res.status(200).json(movie);
   } catch (error) {
     console.log(error);
@@ -61,7 +61,7 @@ const nowShowingMovie = async (req, res) => {
 
 const upcomingMovie = async (req, res) => {
   try {
-    const movie = await MovieModel.findAll({ where: {categoryId: 2} });
+    const movie = await MovieModel.findAll({ where: { categoryId: 2 } });
     res.status(200).json(movie);
   } catch (error) {
     console.log(error);
@@ -83,10 +83,10 @@ const allMovie = async (req, res) => {
   }
 };
 
-const movieDetail = async (req,res) => {
+const movieDetail = async (req, res) => {
   const id = req.params.id;
   try {
-    const movie = await MovieModel.findOne({ where: {id} });
+    const movie = await MovieModel.findOne({ where: { id } });
     res.status(200).json(movie);
   } catch (error) {
     console.log(error);
@@ -96,4 +96,10 @@ const movieDetail = async (req,res) => {
   }
 };
 
-module.exports = { addNewMovie, nowShowingMovie, upcomingMovie, allMovie, movieDetail};
+module.exports = {
+  addNewMovie,
+  nowShowingMovie,
+  upcomingMovie,
+  allMovie,
+  movieDetail,
+};

@@ -38,7 +38,7 @@ const loginController = async (req, res) => {
     });
   }
 
-  return res.json({ msg: "Data is not valid!" });
+  return res.status(400).json({ msg: "Data is not valid!" });
 };
 
 module.exports = loginController;
