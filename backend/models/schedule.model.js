@@ -17,12 +17,12 @@ const ScheduleModel = connection.define(
     },
 
     launchDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
 
     timeSchedule: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

@@ -12,7 +12,7 @@ const addNewMovie = async (req, res) => {
     releaseDate,
     description,
     movieImage,
-    // categoryId,
+    categoryId,
   } = req.body;
 
   try {
@@ -37,7 +37,7 @@ const addNewMovie = async (req, res) => {
       releaseDate: releaseDate,
       description: description,
       movieImage,
-      categoryId: 2,
+      categoryId,
     });
 
     res.json({ msg: "Create Movie successfully" });

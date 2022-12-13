@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../config/api";
 import { useNavigate } from "react-router-dom";
 import SuccessAlert from "../components/SuccessAlert";
+import FailedAlert from "../components/FailedAlert";
 
 function Signup() {
   // hooks
@@ -12,6 +13,7 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,10 +56,6 @@ function Signup() {
     await api
       .post("/auth/signup", sendingData)
       .then(function (response) {
-        const {
-          data: { msg },
-        } = response;
-
         if (response.status === 200) {
           setIsSuccess(true);
           setTimeout(() => {
@@ -67,13 +65,15 @@ function Signup() {
       })
       .catch(function (error) {
         console.log(error);
+        setIsFailure(true);
       });
   };
 
   return (
     <div>
       {/* success alert */}
-      {isSuccess && <SuccessAlert message="Successfully sign up!" />}
+      {(isSuccess && <SuccessAlert message="Successfully sign up!" />) ||
+        (isFailure && <FailedAlert message="Failed to register!" />)}
       <div className="h-screen md:flex">
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
           <div>

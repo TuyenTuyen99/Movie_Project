@@ -1,16 +1,57 @@
-import Account from "../components/Account";
+import { useEffect, useState } from "react";
+import FailedAlert from "../components/FailedAlert";
+import SuccessAlert from "../components/SuccessAlert";
+import api from "../config/api";
 
-function Profile() {
-  const user = Account();
+function UpdateInfo() {
+  const [address, setAddress] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
+
+  const handleChangeAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handleChangeFullName = (e) => {
+    setFullName(e.target.value);
+  };
+  const handleUpdate = async (e) => {
+    e.preventDefault(); // prevent ppl spam click
+    const sendingData = {
+      fullName,
+      address,
+    };
+
+    await api
+      .put("/user/update", sendingData)
+      .then(function (response) {
+        const {
+          data: { msg },
+        } = response;
+
+        if (response.status === 200) {
+          setIsSuccess(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        setIsFailure(true);
+        // setTimeout(() => {
+        //   document.location.reload();
+        // }, 1001);
+      });
+  };
   return (
     <div>
       {/* success alert */}
-      {/* {(isSuccess && <SuccessAlert message="Successfully login!" />)||(isFailure && <FailedAlert message="fail" />)} */}
+      {(isSuccess && <SuccessAlert message="Successfully login!" />) ||
+        (isFailure && <FailedAlert message="fail" />)}
       <div className="h-screen md:flex">
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">
-              Welcome, {user.userName}
+              Welcome to Movie Cinema
             </h1>
             <p className="text-white mt-1">This is your profile page</p>
             <button
@@ -42,7 +83,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.userName}
+                  // value={user.userName}
                   disabled
                 />
               </div>
@@ -61,7 +102,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.email}
+                  // value={user.email}
                   disabled
                 />
               </div>
@@ -80,7 +121,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.phone}
+                  // value={user.phone}
                   disabled
                 />
               </div>
@@ -99,8 +140,8 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.fullName}
-                  disabled
+                  // placeholder={user.fullName}
+                  onChange={handleChangeFullName}
                 />
               </div>
             </div>
@@ -118,8 +159,8 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.address}
-                  disabled
+                  // placeholder={user.address}
+                  onChange={handleChangeAddress}
                 />
               </div>
             </div>
@@ -143,17 +184,18 @@ function Profile() {
               </div>
             </div> */}
 
-            {/* <div className="md:flex md:items-center">
+            <div className="md:flex md:items-center">
               <div className="md:w-1/3"></div>
               <div className="md:w-2/3">
                 <button
                   className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="button"
+                  onClick={handleUpdate}
                 >
                   Save Change
                 </button>
               </div>
-            </div> */}
+            </div>
           </form>
         </div>
       </div>
@@ -161,4 +203,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default UpdateInfo;

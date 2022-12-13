@@ -11,6 +11,7 @@ import SignIn from "../pages/signin";
 import Signup from "../pages/signup";
 import UpcomingMovie from "../pages/upcomingMovie";
 import UserInfo from "../pages/profile";
+import UpdateInfo from "../pages/updateInfo";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/movies/upcoming" element={<UpcomingMovie />}></Route>
         <Route path="/user" element={<UserInfo />}></Route>
         <Route path="/movies/:id" element={<MovieDetail />}></Route>
+        <Route path="/user/update" element={<UpdateInfo />}></Route>
       </Routes>
     </BrowserRouter>
   );

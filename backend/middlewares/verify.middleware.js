@@ -22,6 +22,7 @@ const verifyToken = async (req, res, next) => {
       // forward id property to check role
       req.roleId = foundUser.roleId;
       req.id = foundUser.id;
+      req.userName = foundUser.userName;
       next();
       return;
     }

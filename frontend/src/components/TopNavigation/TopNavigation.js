@@ -1,4 +1,3 @@
-import SuccessAlert from "../SuccessAlert";
 import HiUser from "./HiUser";
 
 function TopNavigation() {
