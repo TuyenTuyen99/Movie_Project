@@ -34,7 +34,7 @@ const scheduleController = async (req, res) => {
   }
 };
 
-const getSchedule = async (req, res) => {
+const getAllSchedule = async (req, res) => {
   try {
     const schedule = await ScheduleModel.findAll();
     res.status(200).json(schedule);
@@ -46,4 +46,17 @@ const getSchedule = async (req, res) => {
   }
 };
 
-module.exports = { scheduleController, getSchedule };
+const movieSchedule = async (req, res) => {
+  const movieId = req.params.id;
+  try {
+    const schedule = await ScheduleModel.findAll({ where: { movieId } });
+    res.status(200).json(schedule);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ msg: "Server get failed in trying to fetch Movie Schedule" });
+  }
+};
+
+module.exports = { scheduleController, getAllSchedule, movieSchedule };

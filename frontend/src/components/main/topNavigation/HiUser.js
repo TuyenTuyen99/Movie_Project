@@ -1,6 +1,5 @@
-
-import Account from "../Account";
-import Logout from "../Logout";
+import Account from "../../Account";
+import Logout from "../../Logout";
 
 function HiUser() {
   const user = Account();

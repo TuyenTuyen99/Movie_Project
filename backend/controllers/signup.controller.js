@@ -35,7 +35,7 @@ const registrationController = async (req, res) => {
       email,
       hashPwd: encrypted,
       phone,
-      address,
+      address
     });
 
     return res.status(201).json({ msg: "Successfully Registered!" });

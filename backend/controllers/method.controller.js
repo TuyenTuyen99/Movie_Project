@@ -1,7 +1,7 @@
 const MethodModel = require("../models/method.model");
 
 const methodController = async (req, res) => {
-  const { type} = req.body;
+  const { type } = req.body;
 
   try {
     // check if existed method
@@ -15,7 +15,7 @@ const methodController = async (req, res) => {
 
     // create and save into database
     await MethodModel.create({
-      type
+      type,
     });
 
     return res.status(201).json({ msg: "Create method successfully" });

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function MovieGallery({ movies }) {
   return (
     <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
-      {5 &&
+      {movies.length &&
         movies.map((movie, key) => {
           return (
             <div

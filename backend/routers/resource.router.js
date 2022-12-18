@@ -8,7 +8,7 @@ const comboController = require("../controllers/combo.controller");
 const seatController = require("../controllers/seat.controller");
 const {
   scheduleController,
-  getSchedule,
+  getAllSchedule,
 } = require("../controllers/schedule.controller");
 
 // build APIs for router
@@ -19,6 +19,6 @@ resourceRouter.post("/method", methodController);
 resourceRouter.post("/combo", comboController);
 resourceRouter.post("/seat", seatController);
 resourceRouter.post("/schedule", scheduleController);
-resourceRouter.get("/schedule", getSchedule);
+resourceRouter.get("/schedule", getAllSchedule);
 
 module.exports = resourceRouter;

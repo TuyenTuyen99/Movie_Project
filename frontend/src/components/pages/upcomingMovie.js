@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../config/api";
+import api from "../../config/api";
 
 function UpcomingMovie() {
   const [movies, setMovies] = useState([]);
@@ -34,7 +34,7 @@ function UpcomingMovie() {
                     className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                     src={`${movie.movieImage}`}
                     alt={movie.title}
-                    style={{height:235}}
+                    style={{ height: 235 }}
                   />
                 </Link>
                 <div className="p-5">

@@ -25,6 +25,11 @@ const ScheduleModel = connection.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    movieId: {
+      type: DataTypes.INTEGER,
+      allowNull:true,
+    }
   },
   {
     timestamps: true,

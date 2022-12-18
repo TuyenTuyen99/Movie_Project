@@ -1,16 +1,53 @@
-import Account from "../components/Account";
+import { useState } from "react";
+import FailedAlert from "../alerts/FailedAlert";
+import SuccessAlert from "../alerts/SuccessAlert";
+import api from "../../config/api";
 
-function Profile() {
-  const user = Account();
+function UpdateInfo() {
+  const [address, setAddress] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
+
+  const handleChangeAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handleChangeFullName = (e) => {
+    setFullName(e.target.value);
+  };
+  const handleUpdate = async (e) => {
+    e.preventDefault(); // prevent ppl spam click
+    const sendingData = {
+      fullName,
+      address,
+    };
+
+    await api
+      .put("/user/update", sendingData)
+      .then(function (response) {
+        if (response.status === 200) {
+          setIsSuccess(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        setIsFailure(true);
+        // setTimeout(() => {
+        //   document.location.reload();
+        // }, 1001);
+      });
+  };
   return (
     <div>
       {/* success alert */}
-      {/* {(isSuccess && <SuccessAlert message="Successfully login!" />)||(isFailure && <FailedAlert message="fail" />)} */}
+      {(isSuccess && <SuccessAlert message=" Your profile has been updated successfully!" />) ||
+        (isFailure && <FailedAlert message="Update failed" />)}
       <div className="h-screen md:flex">
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">
-              Welcome, {user.userName}
+              Welcome to Movie Cinema
             </h1>
             <p className="text-white mt-1">This is your profile page</p>
             <button
@@ -27,8 +64,8 @@ function Profile() {
         </div>
 
         <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-          <form className="w-full max-w-sm">
-            <div className="md:flex md:items-center mb-6">
+          <form className="w-full max-w-sm" onSubmit={handleUpdate}>
+            {/* <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
                 <label
                   className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
@@ -42,7 +79,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.userName}
+                  // value={user.userName}
                   disabled
                 />
               </div>
@@ -61,7 +98,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.email}
+                  // value={user.email}
                   disabled
                 />
               </div>
@@ -80,11 +117,11 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.phone}
+                  // value={user.phone}
                   disabled
                 />
               </div>
-            </div>
+            </div> */}
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
                 <label
@@ -99,8 +136,7 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.fullName}
-                  disabled
+                  onChange={handleChangeFullName}
                 />
               </div>
             </div>
@@ -118,42 +154,22 @@ function Profile() {
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inline-full-name"
                   type="text"
-                  value={user.address}
-                  disabled
+                  onChange={handleChangeAddress}
                 />
               </div>
             </div>
-
-            {/* <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                  htmlFor="inline-password"
-                >
-                  Password
-                </label>
-              </div>
-              <div className="md:w-2/3">
-                <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  id="inline-password"
-                  type="password"
-                  placeholder="******************"
-                />
-              </div>
-            </div> */}
-
-            {/* <div className="md:flex md:items-center">
+            <div className="md:flex md:items-center">
               <div className="md:w-1/3"></div>
               <div className="md:w-2/3">
                 <button
                   className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="button"
+                  onClick={handleUpdate}
                 >
                   Save Change
                 </button>
               </div>
-            </div> */}
+            </div>
           </form>
         </div>
       </div>
@@ -161,4 +177,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default UpdateInfo;

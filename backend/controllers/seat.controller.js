@@ -1,6 +1,6 @@
 const SeatModel = require("../models/seats.model");
 
-const seatController = async (req,res) => {
+const seatController = async (req, res) => {
   const { name, typeId } = req.body;
 
   try {
@@ -15,7 +15,8 @@ const seatController = async (req,res) => {
 
     // create and save into database
     await SeatModel.create({
-      name, typeId
+      name,
+      typeId,
     });
 
     return res.status(201).json({ msg: "Create seat successfully" });

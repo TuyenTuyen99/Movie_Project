@@ -2,7 +2,10 @@ import HiUser from "./HiUser";
 
 function TopNavigation() {
   return (
-    <nav id="header" className="w-full z-30 top-0 py-1 bg-gradient-to-b from-white to-purple-200">
+    <nav
+      id="header"
+      className="w-full z-30 top-0 py-1 bg-gradient-to-b from-white to-purple-200"
+    >
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
         <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
           <svg

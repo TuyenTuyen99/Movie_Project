@@ -62,8 +62,8 @@ const setAssociation = () => {
       type: DataTypes.INTEGER,
     },
   };
-  ScheduleModel.hasMany(BookingModel, option5);
-  BookingModel.belongsTo(ScheduleModel, option5);
+  ScheduleModel.hasMany(BookingSeatModel, option5);
+  BookingSeatModel.belongsTo(ScheduleModel, option5);
 
   // set association for BookingModel and BookingSeatModel 1-many
   const option6 = {
@@ -75,15 +75,15 @@ const setAssociation = () => {
   BookingModel.hasMany(BookingSeatModel, option6);
   BookingSeatModel.belongsTo(BookingModel, option6);
 
-  // set association for PaymentModel and OrderComboModel 1-many
+  // set association for BookingModel and OrderComboModel 1-many
   const option7 = {
     foreignKey: {
-      name: "paymentId",
+      name: "bookingId",
       type: DataTypes.STRING,
     },
   };
-  PaymentModel.hasMany(OrderComboModel, option7);
-  OrderComboModel.belongsTo(PaymentModel, option7);
+  BookingModel.hasMany(OrderComboModel, option7);
+  OrderComboModel.belongsTo(BookingModel, option7);
 
   // set association for SeatTypeModel and SeatModel 1-many
   const option8 = {

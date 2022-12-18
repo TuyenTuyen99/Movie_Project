@@ -1,11 +1,75 @@
+import { useEffect, useState } from "react";
+import api from "../../config/api";
+import { Link, useNavigate } from "react-router-dom";
+import SuccessAlert from "../alerts/SuccessAlert";
+import FailedAlert from "../alerts/FailedAlert";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-function ResetPwd() {
+function Signin() {
+  // hooks
+  const [userName, setUserName] = useState("");
+  const [password, setPwd] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
+  const navigate = useNavigate();
+
+  const [typeInput, setTypeInput] = useState("password");
+  const [showHidePassword, setShowHidePassword] = useState(false);
+
+  // handle function
+  const handleChangeUserName = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const handleChangePwd = (e) => {
+    setPwd(e.target.value);
+  };
+
+  useEffect(() => {
+    if (showHidePassword === true) {
+      setTypeInput("text");
+    } else {
+      setTypeInput("password");
+    }
+  }, [showHidePassword]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // prevent ppl spam click
+    const sendingData = {
+      userName,
+      password,
+    };
+
+    await api
+      .post("/auth/login", sendingData)
+      .then(function (response) {
+        if (response.status === 200) {
+          const { accessToken } = response.data;
+          localStorage.setItem("x-access-token", accessToken);
+          setIsSuccess(true);
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+          setTimeout(() => {
+            document.location.reload();
+          }, 1501);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        setIsFailure(true);
+        // setTimeout(() => {
+        //   document.location.reload();
+        // }, 1001);
+      });
+  };
+
   return (
     <div>
-      {/* success alert */}
-      {isSuccess && <SuccessAlert message="Successfully reset password!" />}
+      {/* Alert */}
+      {(isSuccess && <SuccessAlert message="Successfully login!" />) ||
+        (isFailure && <FailedAlert message="Data is not valid!" />)}
       <div className="h-screen md:flex">
-        
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
           <div>
             <h1 className="text-white font-bold text-4xl font-sans">
@@ -27,8 +91,7 @@ function ResetPwd() {
           <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         </div>
         <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-          
-          <form className="bg-white" onSubmit={handleChangePwd}>
+          <form className="bg-white" onSubmit={handleLogin}>
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Login</h1>
             <p className="text-sm font-normal text-gray-600 mb-7">
               Welcome Back
@@ -50,9 +113,9 @@ function ResetPwd() {
                 className="pl-2 outline-none border-none"
                 type="text"
                 name=""
-                id=""
                 placeholder="Username"
-                onChange={handleOldPwd}
+                onChange={handleChangeUserName}
+                required
               />
             </div>
             <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
@@ -70,17 +133,23 @@ function ResetPwd() {
               </svg>
               <input
                 className="pl-2 outline-none border-none"
-                type="password"
+                type={typeInput}
                 name=""
-                id=""
                 placeholder="Password"
-                onChange={handleNewPwd}
+                onChange={handleChangePwd}
+                required
               />
+                <span onClick={() => setShowHidePassword(!showHidePassword)}>
+                  {!showHidePassword ? (
+                    <AiFillEyeInvisible color="rgb(55 65 81)" />
+                  ) : (
+                    <AiFillEye color="rgb(55 65 81)" />
+                  )}
+                </span>
             </div>
             <button
               type="submit"
               className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
-              onClick={handleChangePwd}
             >
               Login
             </button>
@@ -91,15 +160,19 @@ function ResetPwd() {
               Don't have an account? Sign up here!
             </a>{" "}
             <br></br>
-            <a
-              className="text-sm ml-2 hover:text-blue-500 cursor-pointer"
-              href="#"
-            >
-              Forgot Password ?
-            </a>
+            <Link to={"/forgotpwd"}>
+              <a
+                className="text-sm ml-2 hover:text-blue-500 cursor-pointer"
+                href="#"
+              >
+                Forgot Password ?
+              </a>
+            </Link>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
+
+export default Signin;
