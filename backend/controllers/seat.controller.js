@@ -1,6 +1,7 @@
 const SeatModel = require("../models/seats.model");
+const SeatTypeModel = require("../models/seattype.model");
 
-const seatController = async (req, res) => {
+const addNewSeat = async (req, res) => {
   const { name, typeId } = req.body;
 
   try {
@@ -26,4 +27,17 @@ const seatController = async (req, res) => {
   }
 };
 
-module.exports = seatController;
+const getAllSeat = async (req, res) => {
+  try {
+    const seats = await SeatModel.findAll({
+      include: [SeatTypeModel],
+      order: [["name", "ASC"]],
+    });
+    res.status(200).json(seats);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Server error!" });
+  }
+};
+
+module.exports = {addNewSeat, getAllSeat};

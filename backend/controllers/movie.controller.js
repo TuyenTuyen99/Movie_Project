@@ -1,6 +1,7 @@
 const MovieModel = require("../models/movies.model");
 const { where } = require("sequelize");
 const { Op } = require("sequelize");
+const CategoryModel = require("../models/categories.model");
 
 const addNewMovie = async (req, res) => {
   const {
@@ -48,9 +49,17 @@ const addNewMovie = async (req, res) => {
 };
 
 const nowShowingMovie = async (req, res) => {
+  const limit = !(req.query.limit) ? 1000 : parseInt(req.query.limit);
+  const offset = !(req.query.offset) ? 0 : parseInt(req.query.offset);
   try {
-    const movie = await MovieModel.findAll({ where: { categoryId: 1 } });
-    res.status(200).json(movie);
+    const movies = await MovieModel.findAndCountAll({
+      limit,
+      offset,
+      where: { categoryId: 1 },
+      include: [CategoryModel],
+      order: [["releaseDate", "DESC"]],
+    });
+    res.status(200).json(movies);
   } catch (error) {
     console.log(error);
     res
@@ -61,20 +70,29 @@ const nowShowingMovie = async (req, res) => {
 
 const upcomingMovie = async (req, res) => {
   try {
-    const movie = await MovieModel.findAll({ where: { categoryId: 2 } });
-    res.status(200).json(movie);
+    const movies = await MovieModel.findAndCountAll({
+      limit: parseInt(req.query.limit),
+      offset: parseInt(req.query.offset),
+      where: { categoryId: 2 },
+      include: [CategoryModel],
+      order: [["releaseDate", "ASC"]],
+    });
+    res.status(200).json(movies);
   } catch (error) {
     console.log(error);
     res
       .status(500)
-      .json({ msg: "Server get failed in trying to fetch upComing Movies" });
+      .json({ msg: "Server get failed in trying to fetch Now-showing Movies" });
   }
 };
 
 const allMovie = async (req, res) => {
   try {
-    const movie = await MovieModel.findAll();
-    res.status(200).json(movie);
+    const movies = await MovieModel.findAll({
+      include: [CategoryModel],
+      order: [["releaseDate", "ASC"]],
+    });
+    res.status(200).json(movies);
   } catch (error) {
     console.log(error);
     res

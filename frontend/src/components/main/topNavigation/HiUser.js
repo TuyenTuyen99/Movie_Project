@@ -2,8 +2,9 @@ import Account from "../../Account";
 import Logout from "../../Logout";
 
 function HiUser() {
-  const user = Account();
-  if (user != "") {
+  const token = localStorage.getItem("x-access-token")
+  if (token !== "") {
+    const user = Account();
     return (
       <nav>
         <ul className="md:flex items-center justify-between text-base text-purple-700 pt-4 md:pt-0">
@@ -59,7 +60,9 @@ function HiUser() {
         </li>
       </ul>
     </nav>
-  );
-}
+  );  
+  }
+  
+
 
 export default HiUser;

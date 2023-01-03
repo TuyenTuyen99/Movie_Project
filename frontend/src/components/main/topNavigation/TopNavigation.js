@@ -55,7 +55,7 @@ function TopNavigation() {
                       </svg>
                     </button>
                     <ul
-                      className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none bg-gray-800"
+                      className="dropdown-menu min-w-max absolute hidden bg-gray text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none bg-gray-800"
                       aria-labelledby="dropdownMenuButton2"
                     >
                       <li>
@@ -78,22 +78,6 @@ function TopNavigation() {
                   </div>
                 </div>
               </li>
-              {/* <li>
-                <a
-                  className="inline-block no-underline hover:text-purple-800 hover:no-underline py-2 px-4"
-                  href="#"
-                >
-                  Memberships
-                </a>
-              </li> */}
-              {/* <li>
-                <a
-                  className="inline-block no-underline hover:text-purple-800 hover:no-underline py-2 px-4"
-                  href="#"
-                >
-                  Price
-                </a>
-              </li> */}
             </ul>
           </nav>
         </div>

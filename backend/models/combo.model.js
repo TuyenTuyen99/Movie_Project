@@ -16,7 +16,12 @@ const ComboModel = connection.define(
       allowNull: false,
     },
 
-    image: {
+    detail: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+
+    imageUrl: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../../config/api";
+import Schedule from "./schedule";
 
 const MovieDetail = () => {
   // use hook useParams to get MovieId from Browser URL
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
+  const [display, setDisplay] = useState("none");
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await api.get(`/movies/${id}`);
+        const response = await api.get(`/movies/${movieId}`);
 
         if (response.status === 200) {
           setMovie(response.data);
@@ -21,6 +23,10 @@ const MovieDetail = () => {
     };
     fetchMovies();
   }, []);
+
+  const handleDisplay = () => {
+    setDisplay("block");
+  };
 
   return (
     <div className="bg-gradient-to-bl from-purple-700 to-white">
@@ -62,13 +68,24 @@ const MovieDetail = () => {
                 <span className="leading-relaxed"> {movie.description} </span>
               </p>
 
-              <div className="flex border-t-2 border-gray-200 pt-5 mt-6">
-                <Link to={`/movies/${movie.id}/schedule`}>
-                  <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-                    Booking
-                  </button>
-                </Link>
+              <div className="flex border-gray-200 pt-5 mt-6">
+                <button
+                  onClick={handleDisplay}
+                  className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
+                >
+                  Booking
+                </button>
               </div>
+            </div>
+
+            <div
+              style={{ display: `${display}` }}
+              className="w-4/5 mt-10 border-t-2 border-gray-200 mb-10"
+            >
+              <h1 className="ml-3 pt-5 text-purple-800 font-bold text-xl">
+                Choose schedules:{" "}
+              </h1>
+              <Schedule />
             </div>
           </div>
         </div>

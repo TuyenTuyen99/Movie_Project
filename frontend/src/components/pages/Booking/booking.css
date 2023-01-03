@@ -1,0 +1,109 @@
+.screen {
+  background-color: #fff;
+  height: 120px;
+  width: 100%;
+  margin: 15px 0;
+  margin-bottom: 100px;
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.showcase {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 10px;
+}
+.showcase li small {
+margin-left: 2px;
+}
+
+.bottom-content {
+    background-color: #000;
+    /* margin-top: 10px; */
+    font-size: 0;
+}
+.format-bg-top {
+    width: 100%;
+    background: url(https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/bg-top-seatmap.png) repeat-x top left transparent;
+    height: 8px;
+    overflow: hidden;
+}
+.format-bg-bottom {
+    width: 100%;
+    background: url(https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/bg-bottom-seatmap.png) repeat-x bottom left transparent;
+    height: 8px;
+    overflow: hidden;
+}
+.btn-left, .btn-right {
+    float: none;
+    width: 106px;
+    display: inline-block;
+    /* margin: 0 0 0 3px; */
+    height: 108px;
+    vertical-align: top;
+    background: url(https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/bg-cgv-button-process.png) no-repeat;  
+}
+.btn-right {
+  background-position: -152px -441px;
+  /* margin: 0 60px; */
+}
+.btn-left {
+  background-position: -152px 0;
+  /* margin: 0 50px; */
+}
+
+.minicart-wrapper ul {
+  width: 90%;
+}
+
+.minicart-wrapper ul .item.first .product-details {
+  margin: 0px;
+}
+.minicart-wrapper .product-details {
+  padding-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+.item.first {
+  display: inline-block;
+  width: 40%;
+  margin-left: 10%;
+  font-size: 12px;
+}
+.item {
+  display: inline-block;
+  width: 25%;
+  margin-left: 1%;
+  font-size: 12px;
+}
+.minicart-wrapper {
+  font-size: 0;
+  color: #cccccc;
+  display: inline-block;
+  padding: 0 3px;
+}
+.minicart-wrapper img {
+  width: 74px;
+  height: 108px;
+  display: inline-block;
+}
+.page-title {
+  margin-top: 0px;
+  text-align: center;
+  padding: 5px;
+  background: #231d1c;
+  width: 100%;
+}
+.page-title h1 {
+  font-size: 18px;
+}

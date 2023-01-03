@@ -1,7 +1,7 @@
 const ComboModel = require("../models/combo.model");
 
-const comboController = async (req, res) => {
-  const { name, price } = req.body;
+const addNewCombo = async (req, res) => {
+  const { name, price, imageUrl, detail } = req.body;
 
   try {
     // check if existed combo
@@ -16,7 +16,9 @@ const comboController = async (req, res) => {
     // create and save into database
     await ComboModel.create({
       name,
-      price
+      price,
+      imageUrl,
+      detail,
     });
 
     return res.status(201).json({ msg: "Create combo successfully" });
@@ -26,4 +28,16 @@ const comboController = async (req, res) => {
   }
 };
 
-module.exports = comboController;
+const getAllCombos = async (req, res) => {
+  try {
+    const combos = await ComboModel.findAll({
+      order: [["price", "ASC"]],
+    });
+    res.status(200).json(combos);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Server error!" });
+  }
+};
+
+module.exports = { addNewCombo, getAllCombos };

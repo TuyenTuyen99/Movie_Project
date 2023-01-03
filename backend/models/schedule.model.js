@@ -22,14 +22,14 @@ const ScheduleModel = connection.define(
     },
 
     timeSchedule: {
-      type: DataTypes.STRING,
+      type: DataTypes.TIME(6),
       allowNull: false,
     },
 
     movieId: {
       type: DataTypes.INTEGER,
-      allowNull:true,
-    }
+      allowNull: true,
+    },
   },
   {
     timestamps: true,

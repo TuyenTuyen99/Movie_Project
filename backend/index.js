@@ -8,6 +8,7 @@ const movieRouter = require("./routers/movies.router");
 const resourceRouter = require("./routers/resource.router");
 const userRouter = require("./routers/users.router");
 const sendMailRouter = require("./routers/mail.router");
+const bookingRouter = require("./routers/booking.router");
 
 // use middlewares
 app.use(cors())
@@ -20,6 +21,7 @@ app.use("/movies", movieRouter);
 app.use("/resource", resourceRouter);
 app.use("/user", userRouter);
 app.use("/email", sendMailRouter);
+app.use("/booking", bookingRouter);
 
 // execute creating association
 setAssociation();

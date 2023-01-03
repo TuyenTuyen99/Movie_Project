@@ -6,9 +6,8 @@ const OrderComboModel = connection.define(
   MODEL_NAME,
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING, //uuid
       primaryKey: true,
-      autoIncrement: true
     },
 
     quantity: {
